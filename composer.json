@@ -1,0 +1,12 @@
+{
+    "name": "lenovo/online-store",
+    "description": "composer for online store",
+    "type": "project",composer dump-autoload
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}
