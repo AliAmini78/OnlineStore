@@ -1,0 +1,17 @@
+{
+    "name": "lenovo/online-store",
+    "description": "online store",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Core\\": "Core/",
+            "Utils\\" : "Utils/",
+            "config\\" : "config/"
+        },
+        "files": [
+            "./Helper/Functions.php"
+        ]
+    },
+    "require": {}
+}
