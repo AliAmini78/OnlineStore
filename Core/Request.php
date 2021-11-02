@@ -56,7 +56,7 @@ class Request {
 
         // declare body for get data from user 
         $body = [];
-
+        
         // condition for GET method
         if ($this->getMethod() === 'get') {
             
@@ -66,12 +66,11 @@ class Request {
             }
             return $body;
         }
-
         // get all data from POST method
         foreach ($_POST as $key => $value) {
-            $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+          
+            $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
         }
-
         // return data 
         return $body;
     }

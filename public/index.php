@@ -8,6 +8,10 @@ require_once '../vendor/autoload.php';
 use Core\Application;
 
 
+define( 'ROOT_DIR', dirname(__FILE__) );
+
+
+//instance the main application class
 $app = new Application();
 
 // routes manage

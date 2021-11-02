@@ -21,6 +21,7 @@ $app->router->get('/', [$HomeController, 'index']);
 
 //register routes
 $app->router->get('/register', [$RegisterController, 'index']);
+$app->router->post('/register', [$RegisterController, 'addUser']);
 
 
 //login routes
