@@ -10,17 +10,17 @@ namespace Data\Construct;
 interface BaseInterface
 {
     // function for add item in database 
-    public function Create(array $data);
+    public function createItem(array $data);
 
     // function for edit item in database
-    public function Edit();
+    public function editItem(int $id , array $data);
 
     //function for delete item in database 
-    public function Delete();
+    public function deleteItem($id);
 
     //function for get one item from database
-    public function GetItem();
+    public function getItem($id);
 
     //function for get all item from database 
-    public function GetAllItems();
+    public function getAllItems();
 }

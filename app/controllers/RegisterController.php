@@ -34,7 +34,7 @@ class RegisterController extends Controller
 
 
     //post method 
-    public function addUser(Request $request)
+    public function addUser()
     {
 
         //instance UserRepository
@@ -78,9 +78,12 @@ class RegisterController extends Controller
 
 
         //CREATE USER 
-        $result = $user->create($data);
+        $result = $user->createItem($data);
 
         //redirect to login if the result was true
-        header('location: /login');
+        if (!$result) {
+            header('Location: /register');    
+        }
+        header('Location: /login');
     }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 //name space
@@ -7,24 +7,26 @@ namespace Data\Repository;
 //usage package
 use Data\Construct\BaseInterface;
 use Core\Database;
+use Helper\PrepareData;
 use Helper\ValidateData;
+use pdo;
 
 class BaseRepository extends Database  implements BaseInterface
 {
 
     // function for add item in database
-    public function Create(array $data){        
+    public function createItem(array $data)
+    {
 
         // prepare input data for insert to db 
-        $PrepareData = ValidateData::makeDataForDb($data);
-        //dd($data);
-        
+        $PrepareData = PrepareData::insertToDb($data);
+
         // try to insert data in db
         try {
-            
+
             $statement = $this->pdo->prepare("insert into {$this->table} ({$PrepareData['fields']}) values ({$PrepareData['params']})");
             $statement->execute($data);
-            return ;
+            return;
         } catch (\Throwable $th) {
             header("Location: {$this->FailedRedirectRout}");
         }
@@ -33,22 +35,53 @@ class BaseRepository extends Database  implements BaseInterface
 
 
     // function for edit item in database
-    public function Edit(){
-        return '';
+    public function editItem($id, $data)
+    {
+        
+        // prepare input data for insert to db 
+        $PrepareData = PrepareData::updateToDb($data);
+        
+        // try to insert data in db
+        try {
+            $statement = $this->pdo->prepare("UPDATE {$this->table} SET {$PrepareData} WHERE id=$id");
+            $statement->execute($data);
+            return true;
+            
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     //function for delete item in database 
-    public function Delete(){
+    public function deleteItem($id)
+    {
         return '';
     }
 
     //function for get one item from database
-    public function GetItem(){
-        return '';
+    public function getItem($id)
+    {
+        try {
+            
+            $statement = $this->pdo->prepare("SELECT * FROM {$this->table} where id= ? LIMIT 1");
+            $statement->execute([$id]);
+            return  $statement->fetch($this->pdo::FETCH_ASSOC);
+        } catch (\Throwable $th) {
+            header("Location: /login");
+        }
     }
 
     //function for get all item from database 
-    public function GetAllItems(){
-        return '';
+    public function getAllItems()
+    {
+
+        // try to get all data in db
+        try {
+            $statement = $this->pdo->prepare("SELECT * FROM {$this->table}");
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Throwable $th) {
+            header("Location: {$this->FailedRedirectRout}");
+        }
     }
 }

@@ -42,8 +42,8 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="text-dark h5">
-                                item
+                            <a href="/user-list" class="text-dark h5">
+                                Users
                             </a>
                         </li>
                         <li class="list-group-item">
@@ -60,4 +60,4 @@
                 </div>
             </nav>
 
-            <main role="main" class=" pt-3 px-4">
+            <main role="main" style="width: 85%;"class=" pt-3 px-4">
