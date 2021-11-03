@@ -75,11 +75,12 @@ class UserController extends Controller
 
         //update user 
         $result = $user->editItem($UserId, $data);
-
+        
         if (!$result) {
             header("Location:/edit-user?id={$UserId}");
             return;
         }
+        ErrorMessage::message('user edit successfully !!');
         header("Location:/user-list");
         return;
     }
@@ -101,8 +102,10 @@ class UserController extends Controller
 
         if (!$result) {
             header("Location:/user-list");
+            ErrorMessage::message('some thing wrong !!');
             return;
         }
+        ErrorMessage::message('user delete successfully !!');
         header("Location:/user-list");
     }
 }
