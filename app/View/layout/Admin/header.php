@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="text-dark h5">
+                            <a href="/category" class="text-dark h5">
                                 category
                             </a>
                         </li>

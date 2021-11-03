@@ -19,8 +19,13 @@ class UserController extends Controller
 
     public function index()
     {
+        //instance user repository class
         $Users = new UserRepository();
+
+        // get all user data from db
         $AllData =  $Users->GetAllItems();
+
+        //set all data for send to view
         $params = [
             "AllData" => $AllData,
             'message' => ErrorMessage::requireErrorMessages('Message'),

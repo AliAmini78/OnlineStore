@@ -8,14 +8,9 @@ use Data\Construct\UserInterface;
 use Helper\PasswordOption;
 class UserRepository extends BaseRepository implements UserInterface
 {
+    //class table name
     protected $table = "user";
 
-    // THE SUCCESS REDIRECT ROUT ABOUT USER  
-    public $SuccessesRedirectRout =  "/login";
-
-
-    // THE FAILED REDIRECT ROUT ABOUT USER  
-    public $FailedRedirectRout =  "/register";
 
 
     
