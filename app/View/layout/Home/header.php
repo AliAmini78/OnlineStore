@@ -15,7 +15,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                    <li><a href="/test" class="nav-link px-2 text-white">test</a></li>
+                    <li><a href="/Admin" class="nav-link px-2 text-white">dashboard</a></li>
 
                 </ul>
 

@@ -21,4 +21,16 @@ class SessionManager
     {
         $_SESSION[$SessionName] = $SessionValue;
     }
+
+
+    /**
+     * make login session function
+     *
+     * @return void
+     */
+    public static function loginUserSession($data){
+        $_SESSION['user_name'] = $data['full_name'];
+        $_SESSION['user_email'] = $data['email'];
+        $_SESSION['is_login'] = true;
+    }
 }

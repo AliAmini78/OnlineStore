@@ -1,6 +1,4 @@
 <?php 
-// requirement files 
-require_once '../vendor/autoload.php';
 
 //usage package
 use App\Controllers\HomeController;
@@ -26,3 +24,4 @@ $app->router->post('/register', [$RegisterController, 'addUser']);
 
 //login routes
 $app->router->get('/login', [$LoginController, 'index']);
+$app->router->post('/login', [$LoginController, 'login']);

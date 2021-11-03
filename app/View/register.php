@@ -1,4 +1,4 @@
-<?php require_once 'layout/header.php' ?>
+<?php require_once 'layout/Home/header.php' ?>
 
 
 <form action="/register" method="POST">
@@ -9,50 +9,54 @@
         <label for="FullName">Full name</label>
 
 
-        <?php if(isset($_SESSION['full_name'])) { ?>
-        <span class="bg-danger text-white rounded p-1"> fill the full name</span>
-        <?php unset($_SESSION['full_name']);  }?>
+        <?php if (isset($_SESSION['full_name'])) { ?>
+            <span class="bg-danger text-white rounded p-1"> fill the full name</span>
+        <?php unset($_SESSION['full_name']);
+        } ?>
 
-        
+
     </div>
 
     <div class="form-floating mb-3 col-5">
         <input type="email" name="email" value="<?= isset($email) ? $email : "" ?>" class="form-control mb-2" id="email" placeholder="name@example.com">
         <label for="email">Email address</label>
-        <?php if(isset($_SESSION['email'])) { ?>
-        <span class="bg-danger text-white rounded p-1"> fill the email</span>
-        <?php unset($_SESSION['email']); }?>
+        <?php if (isset($_SESSION['email'])) { ?>
+            <span class="bg-danger text-white rounded p-1"> fill the email</span>
+        <?php unset($_SESSION['email']);
+        } ?>
     </div>
 
     <div class="form-floating mb-3 col-5">
         <input type="text" name="phone_number" value="<?= isset($phone_number) ? $phone_number : "" ?>" class="form-control mb-2" id="PhoneNumber" placeholder="name@example.com">
         <label for="PhoneNumber">phone number</label>
-        <?php if(isset($_SESSION['phone_number'])) { ?>
-        <span class="bg-danger text-white rounded p-1">fill the phone number</span> 
-        <?php unset($_SESSION['phone_number']); }?>
+        <?php if (isset($_SESSION['phone_number'])) { ?>
+            <span class="bg-danger text-white rounded p-1">fill the phone number</span>
+        <?php unset($_SESSION['phone_number']);
+        } ?>
     </div>
 
     <div class="mb-3 col-5">
         <label for="address" class="form-label ">Address : </label>
         <textarea name="address" class="form-control mb-2" id="address" rows="3"><?= isset($address) ? $address : "" ?></textarea>
-        <?php if(isset($_SESSION['address'])) { ?>
-        <span class="bg-danger text-white rounded p-1">fill the address</span> 
-        <?php unset($_SESSION['address']); }?>
+        <?php if (isset($_SESSION['address'])) { ?>
+            <span class="bg-danger text-white rounded p-1">fill the address</span>
+        <?php unset($_SESSION['address']);
+        } ?>
     </div>
 
     <div class="form-floating mb-3 col-5">
         <input type="password" name="password" class="form-control mb-2" id="password" placeholder="Password">
         <label for="password">Password</label>
-        <?php if(isset($password)) { ?>
-        <span class="bg-danger text-white rounded p-1">fill the password</span> 
-        <?php }?>
+        <?php if (isset($password)) { ?>
+            <span class="bg-danger text-white rounded p-1">fill the password</span>
+        <?php } ?>
     </div>
     <div class="form-floating mb-3 col-5">
         <input type="password" name="confirm_password" class="form-control mb-2" id="ConfirmPassword" placeholder="Password">
         <label for="ConfirmPassword">confirm password</label>
-        <?php if(isset($confirm_password)) { ?>
-        <span class="bg-danger text-white rounded p-1">fill the confirm password</span> 
-        <?php }?>
+        <?php if (isset($confirm_password)) { ?>
+            <span class="bg-danger text-white rounded p-1">fill the confirm password</span>
+        <?php } ?>
     </div>
 
     <span>
@@ -62,4 +66,20 @@
 
 </form>
 
-<?php require_once 'layout/footer.php' ?>
+<?php require_once 'layout/Home/footer.php' ?>
+
+<input type="hidden" value="<?= $message ?>" id="message">
+
+<script>
+    let link = document.querySelector('#contact');
+
+    var SweetAlertMessage = document.querySelector('#message').value;
+    if (SweetAlertMessage.trim() !== '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: SweetAlertMessage ,
+            //footer: '<a href="">Why do I have this issue?</a>'
+        })
+    }
+</script>

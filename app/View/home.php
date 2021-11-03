@@ -1,5 +1,5 @@
-<?php require_once 'layout/header.php' ?>
+<?php require_once 'layout/Home/header.php' ?>
 
 <h1>hello world</h1>
 
-<?php require_once 'layout/footer.php' ?>
+<?php require_once 'layout/Home/footer.php' ?>
