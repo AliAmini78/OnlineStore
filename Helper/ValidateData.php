@@ -37,4 +37,20 @@ class ValidateData
         return $password === $confirmPassword;
     }
 
+    /**
+     * prepare input data for db
+     *
+     * @param array $data = user data array
+     * @return array 
+     */
+    public static function makeDataForDb(array $data)
+    {
+        $DataArray = [];
+        $fields = join(",", array_keys($data));
+        $DataArray['fields'] = $fields;
+        $params = join(",", array_map(fn ($item) => ":$item", array_keys($data)));
+        $DataArray['params'] = $params;
+        return $DataArray;
+    }
+
 }

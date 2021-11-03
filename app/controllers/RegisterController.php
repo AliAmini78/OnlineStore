@@ -11,7 +11,8 @@ namespace App\Controllers;
 use Core\Controller;
 use Core\Request;
 use Helper\ValidateData;
-
+use Helper\PasswordOption;
+use Data\Repository\UserRepository;
 /**
  * register controller 
  */
@@ -29,18 +30,35 @@ class RegisterController extends Controller
     public function addUser(Request $request)
     {
         //get data from input
-        $data = $request->getBody();
+        $data = $_REQUEST;//$request->getBody();
 
+
+        //variables
+        $password = $data['password'];
+        $ConfirmPassword = $data['confirm_password'];
+        unset($data['confirm_password']); 
+
+       
         // validate data come from user
         $isValid = ValidateData::validateUserInput($data);
-        $isPasswordConfirm = ValidateData::checkPasswordConfirm($data['password'],$data['confirm_password']);
+        $isPasswordConfirm = PasswordOption::checkPasswordConfirm($password, $ConfirmPassword);
 
         if (!$isValid || !$isPasswordConfirm) {
-           
-            $this->render('register' , $data);
+            $this->render('register', $data);
             return;
         }
-         
+
+
+        //hash the password
+        $data['password'] = PasswordOption::hashPassword($password);
+
+        //instance UserRepository
+        $user = new UserRepository();
+
+
+        //CREATE USER 
+        $result = $user->create($data);
+
         //redirect to login if the result was true
         header('location: /login');
     }

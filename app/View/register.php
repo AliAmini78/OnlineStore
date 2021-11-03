@@ -7,9 +7,13 @@
     <div class="form-floating mb-3 col-5">
         <input type="text" name="full_name" value="<?= isset($full_name) ? $full_name : "" ?>" class="form-control mb-2" id="FullName" placeholder="name@example.com">
         <label for="FullName">Full name</label>
+
+
         <?php if(isset($_SESSION['full_name'])) { ?>
         <span class="bg-danger text-white rounded p-1"> fill the full name</span>
         <?php unset($_SESSION['full_name']);  }?>
+
+        
     </div>
 
     <div class="form-floating mb-3 col-5">
