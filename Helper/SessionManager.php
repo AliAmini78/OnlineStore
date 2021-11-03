@@ -3,7 +3,8 @@
 //namespace
 namespace Helper;
 
-
+//usage package
+use Helper\ErrorMessage;
 
 /**
  * class for manage session 
@@ -22,6 +23,18 @@ class SessionManager
         $_SESSION[$SessionName] = $SessionValue;
     }
 
+    /**
+     * valid user session for access
+     *
+     * @return redirect
+     */
+    public static function validUserLogin(){
+        if (!isset($_SESSION['is_login'])||$_SESSION['is_login'] == false) {
+            ErrorMessage::message('please log in !!');
+            header('Location: /login');
+        }
+    }
+
 
     /**
      * make login session function
@@ -32,5 +45,16 @@ class SessionManager
         $_SESSION['user_name'] = $data['full_name'];
         $_SESSION['user_email'] = $data['email'];
         $_SESSION['is_login'] = true;
+    }
+
+    /**
+     * clear user session for logout
+     *
+     * @return redirect
+     */
+    public static function userLogout(){
+        $_SESSION['is_login'] = false;
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
     }
 }

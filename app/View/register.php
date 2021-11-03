@@ -68,7 +68,7 @@
 
 <?php require_once 'layout/Home/footer.php' ?>
 
-<input type="hidden" value="<?= $message ?>" id="message">
+<input type="hidden" value="<?= isset($message)?$message:''?>" id="message">
 
 <script>
     let link = document.querySelector('#contact');
@@ -78,7 +78,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: SweetAlertMessage ,
+            text: SweetAlertMessage,
             //footer: '<a href="">Why do I have this issue?</a>'
         })
     }

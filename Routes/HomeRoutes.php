@@ -25,3 +25,4 @@ $app->router->post('/register', [$RegisterController, 'addUser']);
 //login routes
 $app->router->get('/login', [$LoginController, 'index']);
 $app->router->post('/login', [$LoginController, 'login']);
+$app->router->get('/logout', [$LoginController, 'logout']);

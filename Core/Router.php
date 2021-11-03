@@ -103,8 +103,8 @@ class Router
     {
         foreach($params as $key=>$value ){
             $$key = $value;
-           
         }
+        
         
         include_once "../App/View/{$view}.php";
     }

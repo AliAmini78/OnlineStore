@@ -33,7 +33,7 @@ class UserRepository extends BaseRepository implements UserInterface
             $statement->execute([$email]);
             return  $statement->fetch($this->pdo::FETCH_ASSOC);
         } catch (\Throwable $th) {
-            header("Location: /loginGET.php");
+            header("Location: /login");
         }
     }
 
@@ -49,7 +49,7 @@ class UserRepository extends BaseRepository implements UserInterface
         $result = PasswordOption::dehashPassword($password , $HashPassword);
         if (!$result) {
             $_SESSION['email'] = "ایمیل اشتباه میباشد";
-            header("Location: /loginGET.php");
+            header("Location: /login");
             die;
         }
         return $result;

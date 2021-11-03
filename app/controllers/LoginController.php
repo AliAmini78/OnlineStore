@@ -8,6 +8,8 @@ namespace App\Controllers;
 use Core\Controller;
 use Data\Repository\UserRepository;
 use Helper\SessionManager;
+use Helper\ValidateData;
+use Helper\ErrorMessage;
 
 /**
  * log in controller
@@ -18,7 +20,10 @@ class LoginController extends Controller
     //controller index page
     public function index()
     {
-        $this->render('login');
+        $params = [
+            'message' => ErrorMessage::requireErrorMessages('Message'),
+        ];
+        $this->render('login', $params);
     }
 
     public function login()
@@ -26,17 +31,36 @@ class LoginController extends Controller
 
 
         //get variables from input
-        $email =  $_REQUEST['email'];
-        $password = $_REQUEST['password'];
+        $data = $_REQUEST;
+        $email =  $data['email'];
+        $password = $data['password'];
 
+
+        // validate data come from user
+        $isValid = ValidateData::validateUserInput($data);
+
+
+
+
+        // condition for is input valid
+        if (!$isValid) {
+            $this->render('login', $data);
+            return;
+        }
 
         // find user by email 
         $user = new UserRepository();
 
+        // is user exist
+        $result = $user->findUserByEmail($email);
+        if ($result == false) {
+
+            ErrorMessage::message('the email in wrong');
+            header('Location:/login');
+            return;
+        }
 
         // validate password
-        $result = $user->findUserByEmail($email);
-        
         $HashPassword = $result['password'];
         $isLogin  = UserRepository::loginAccess($password, $HashPassword);
 
@@ -44,5 +68,17 @@ class LoginController extends Controller
             SessionManager::loginUserSession($result);
             header("Location: /Admin");
         }
+    }
+
+    public function logout()
+    {
+        // log out the user 
+        SessionManager::userLogout();
+
+        // make logout message
+        ErrorMessage::message('you log out successfully!!');
+
+        header('Location: /');
+
     }
 }
