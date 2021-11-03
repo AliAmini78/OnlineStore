@@ -74,14 +74,35 @@ class UserController extends Controller
         }
 
         //update user 
-        $result = $user->editItem($UserId,$data);
+        $result = $user->editItem($UserId, $data);
 
         if (!$result) {
             header("Location:/edit-user?id={$UserId}");
             return;
         }
         header("Location:/user-list");
+        return;
+    }
+
+
+    //GET -> DELETE USER
+    public function delete()
+    {
+        //instance UserRepository
+        $user = new UserRepository();
+
+        //get data from input
+        $userId = $_GET['id'];
+
+
+        //delete item
+        $result = $user->deleteItem($userId);
+
+
+        if (!$result) {
+            header("Location:/user-list");
             return;
-        
+        }
+        header("Location:/user-list");
     }
 }

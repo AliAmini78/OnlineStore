@@ -20,3 +20,4 @@ $app->router->get('/Admin', [$AdminController, 'index']);
 $app->router->get('/user-list', [$UserController,'index'] );
 $app->router->get('/edit-user', [$UserController,'edit'] );
 $app->router->post('/edit-user', [$UserController,'editPost'] );
+$app->router->get('/delete-user', [$UserController,'delete'] );

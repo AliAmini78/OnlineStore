@@ -41,7 +41,7 @@ class BaseRepository extends Database  implements BaseInterface
         // prepare input data for insert to db 
         $PrepareData = PrepareData::updateToDb($data);
         
-        // try to insert data in db
+        // try to update data in db
         try {
             $statement = $this->pdo->prepare("UPDATE {$this->table} SET {$PrepareData} WHERE id=$id");
             $statement->execute($data);
@@ -55,7 +55,16 @@ class BaseRepository extends Database  implements BaseInterface
     //function for delete item in database 
     public function deleteItem($id)
     {
-        return '';
+        // try to update data in db
+        try {
+            $statement = $this->pdo->prepare("DELETE FROM {$this->table}  WHERE id=:id");
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->execute();
+            return true;
+            
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     //function for get one item from database
