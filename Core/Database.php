@@ -27,6 +27,10 @@ class Database
     public function __construct()
     {
         // connect to db
-        $this->pdo = new PDO("{$this->DbType}:host={$this->host};dbname={$this->DbName}",$this->UserName,$this->Password);
+        try {
+            $this->pdo = new PDO("{$this->DbType}:host={$this->host};dbname={$this->DbName}",$this->UserName,$this->Password);
+        } catch (\Throwable $th) {
+            echo 'the problem is from data base !!! ';
+        }
     }
 }

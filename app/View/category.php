@@ -4,11 +4,10 @@
     <div class="border backgroundWhite p-5">
 
         <div class="row border-bottom pb-3" style="display: flex; justify-content:space-between;">
-            <div>
-                <h2 class="text-info "> User List</h2>
+            <div class="col-6">     
+                <h2 class="text-info" > category List</h2>
             </div>
-
-            <div>
+            <div class="col-6" >
                 <a class="btn btn-info text-white" href="/add-category"> add category</a>
             </div>
         </div>
@@ -42,8 +41,8 @@
                                 
                                 <td>
                                     <div style="display:flex; justify-content:end;">
-                                        <a href="/delete-user?id=<?= $value['id'] ?>" class="btn btn-danger text-white">delete</a>
-                                        <a href="/edit-user?id=<?= $value['id'] ?>" class="btn btn-info text-white mx-2">edit</a>
+                                        <a href="/delete-category?id=<?= $value['id'] ?>" class="btn btn-danger text-white">delete</a>
+                                        <a href="/edit-category?id=<?= $value['id'] ?>" class="btn btn-info text-white mx-2">edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -62,3 +61,20 @@
 </div>
 
 <?php require_once 'layout/Admin/footer.php' ?>
+
+
+<input type="hidden" value="<?= isset($message)?$message:''?>" id="message">
+
+<script>
+    let link = document.querySelector('#contact');
+
+    var SweetAlertMessage = document.querySelector('#message').value;
+    if (SweetAlertMessage.trim() !== '') {
+        Swal.fire({
+            icon: 'success',
+            title: 'yeah',
+            text: SweetAlertMessage,
+            //footer: '<a href="">Why do I have this issue?</a>'
+        })
+    }
+</script>

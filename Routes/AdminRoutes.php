@@ -30,3 +30,6 @@ $app->router->get('/delete-user', [$UserController,'delete'] );
 $app->router->get('/category', [$CategoryController,'index'] );
 $app->router->get('/add-category', [$CategoryController,'add'] );
 $app->router->post('/add-category', [$CategoryController,'addPost'] );
+$app->router->get('/edit-category', [$CategoryController,'edit'] );
+$app->router->post('/edit-category', [$CategoryController,'editPost'] );
+$app->router->get('/delete-category', [$CategoryController,'delete'] );
