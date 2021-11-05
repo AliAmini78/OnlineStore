@@ -5,6 +5,7 @@
 use App\Controllers\AdminController;
 use App\Controllers\UserController;
 use App\Controllers\CategoryController;
+use App\Controllers\ProductController;
 
 // the instance controller classes
 
@@ -12,6 +13,8 @@ use App\Controllers\CategoryController;
 $AdminController = new AdminController();
 $UserController = new UserController();
 $CategoryController = new CategoryController();
+$ProductController = new ProductController();
+
 
 // HOME routes
 $app->router->get('/Admin', [$AdminController, 'index']);
@@ -33,3 +36,7 @@ $app->router->post('/add-category', [$CategoryController,'addPost'] );
 $app->router->get('/edit-category', [$CategoryController,'edit'] );
 $app->router->post('/edit-category', [$CategoryController,'editPost'] );
 $app->router->get('/delete-category', [$CategoryController,'delete'] );
+
+
+//product routes
+$app->router->get('/product' ,[$ProductController,'index']);

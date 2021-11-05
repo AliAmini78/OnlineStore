@@ -52,8 +52,8 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" class="text-dark h5">
-                                test
+                            <a href="/product" class="text-dark h5">
+                                product
                             </a>
                         </li>
                     </ul>
