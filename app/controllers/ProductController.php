@@ -6,16 +6,22 @@ namespace App\Controllers;
 
 //usage package
 use Core\Controller;
+use Data\Repository\CategoryRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
+use Helper\ValidateData;
+use Helper\FileUpload;
 
 class ProductController extends Controller
 {
 
     protected ProductRepository $product;
+    protected CategoryRepository $category;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->product = new ProductRepository();
+        $this->category = new CategoryRepository();
     }
 
 
@@ -26,12 +32,161 @@ class ProductController extends Controller
 
 
         //set all data for send to view
-        $param=[
+        $param = [
             "AllData" => $AllData,
             'message' => ErrorMessage::requireErrorMessages('Message'),
         ];
 
-        $this->render('product',$param);
+        $this->render('product', $param);
+    }
 
+    // GET -> CREATE product
+    public function add()
+    {
+        //get all categories
+        $category = $this->category->getAllItems();
+
+        // prepare params for send to view
+        $param = [
+            'category' => $category,
+        ];
+        $this->render('add-product', $param);
+    }
+
+    //POST -> CREATE product
+    public function addPost()
+    {
+        //get data
+        $data = $_REQUEST;
+        $pic = $_FILES['pic'];
+
+        //validate input data 
+        $isValid = ValidateData::validateUserInput($data);
+        if (!$isValid) {
+            $this->add();
+            return;
+        }
+
+
+        // upload img 
+        $ImgPath = FileUpload::ImgUploader($pic);
+
+        // set img upload path to our data for going to db 
+        $data['pic'] = $ImgPath;
+
+        //insert data to db
+        $result = $this->product->createItem($data);
+
+        // the redirect condition for exact route
+        if (!$result) {
+            ErrorMessage::message('product successfully added !!');
+            header('Location: /product');
+        }
+        header('Location: /product');
+    }
+
+
+    // GET -> EDIT product  
+    public function edit()
+    {
+        //get value from header for get the item
+        $id = $_GET['id'];
+
+        // find item from db
+        $data = $this->product->getItem($id);
+
+        //get all categories
+        $category = $this->category->getAllItems();
+
+        //prepare params for send to view
+        $param = [
+            'data' => $data,
+            'category' => $category,
+        ];
+
+        // render view whit param
+        $this->render('edit-product', $param);
+    }
+
+    // POST -> EDIT  product
+    public function editPost()
+    {
+
+        //get data
+        $data = $_REQUEST;
+        $id = $data['id'];
+        unset($data['id']);
+
+        //get current item for delete the pic
+        $currentItem = $this->product->getItem($id);
+
+        //validate input data 
+        $isValid = ValidateData::validateUserInput($data);
+        if (!$isValid) {
+            $category = $this->category->getAllItems();
+            $param = [
+                'category' => $category,
+            ];
+            $this->render('add-product', $param);
+            return;
+        }
+
+        //validation data 
+        $prevPicUrl = $currentItem['pic'];
+        $File = $_FILES['pic'];
+        $ImgPath = $prevPicUrl;
+
+        // new pic select functions 
+        $Pic = FileUpload::ExistFile($File);
+
+
+        //condition for is user set new pic ??
+        if ($Pic != null) {
+            FileUpload::DeleteFile($prevPicUrl);
+            $ImgPath =FileUpload::ImgUploader($Pic);
+        }
+
+
+        // set img upload path to our data for going to db 
+        $data['pic'] = $ImgPath;
+
+        //insert data to db
+        $result = $this->product->editItem($id,$data);
+
+        // the redirect condition for exact route
+        if (!$result) {
+            ErrorMessage::message('product successfully added !!');
+            header('Location: /product');
+        }
+        header('Location: /product');
+    }
+
+
+    //GET -> DELETE product 
+    public function delete()
+    {
+        // get id from header
+        $id = $_GET['id'];
+
+        //get current item for access to pic path for delete
+        $item = $this->product->getItem($id);
+
+
+        //the current item pic path for delete
+        $ImgPath = $item['pic'];
+        //delete locally pic
+        FileUpload::DeleteFile($ImgPath);
+
+        //delete item
+        $result = $this->product->deleteItem($id);
+
+
+        if (!$result) {
+            header("Location:/product");
+            ErrorMessage::message('some thing wrong !!');
+            return;
+        }
+        ErrorMessage::message('product delete successfully !!');
+        header("Location:/product");
     }
 }

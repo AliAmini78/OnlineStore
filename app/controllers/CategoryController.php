@@ -38,7 +38,6 @@ class CategoryController extends Controller
 
     //GET -> CREATE category
     public function add(){
-
         $this->render('add-category');
     }
 
@@ -56,16 +55,17 @@ class CategoryController extends Controller
             return;
         }
 
+
         //CREATE category
         $result = $this->category->createItem($data);
 
-        //redirect to login if the result was true
+
+        // the redirect condition for exact route
         if (!$result) {
             ErrorMessage::message('category successfully added !!');
             header('Location: /category');    
         }
         header('Location: /category');
-        dd($isValid);
     }
 
 

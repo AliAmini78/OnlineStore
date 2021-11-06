@@ -1,7 +1,7 @@
 <?php require_once 'layout/Admin/header.php' ?>
 
 <form action="/add-category" method="POST">
-    <h1 class="h3 mb-3 fw-normal">Register Page</h1>
+    <h1 class="h3 mb-3 fw-normal">add category Page</h1>
 
     <div class="form-floating mb-3 col-5">
         <input type="text" name="title"  class="form-control mb-2" id="title" placeholder="name@example.com">

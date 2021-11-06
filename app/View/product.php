@@ -8,7 +8,7 @@
                 <h2 class="text-info" > product List</h2>
             </div>
             <div class="col-6" >
-                <a class="btn btn-info text-white" href="/add-category"> add category</a>
+                <a class="btn btn-info text-white" href="/add-product"> add product</a>
             </div>
         </div>
         <br />
@@ -41,8 +41,8 @@
                                 
                                 <td>
                                     <div style="display:flex; justify-content:end;">
-                                        <a href="/delete-category?id=<?= $value['id'] ?>" class="btn btn-danger text-white">delete</a>
-                                        <a href="/edit-category?id=<?= $value['id'] ?>" class="btn btn-info text-white mx-2">edit</a>
+                                        <a href="/delete-product?id=<?= $value['id'] ?>" class="btn btn-danger text-white">delete</a>
+                                        <a href="/edit-product?id=<?= $value['id'] ?>" class="btn btn-info text-white mx-2">edit</a>
                                     </div>
                                 </td>
                             </tr>

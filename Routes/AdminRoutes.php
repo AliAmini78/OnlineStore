@@ -40,3 +40,8 @@ $app->router->get('/delete-category', [$CategoryController,'delete'] );
 
 //product routes
 $app->router->get('/product' ,[$ProductController,'index']);
+$app->router->get('/add-product' ,[$ProductController,'add']);
+$app->router->post('/add-product' ,[$ProductController,'addPost']);
+$app->router->get('/edit-product' ,[$ProductController,'edit']);
+$app->router->post('/edit-product' ,[$ProductController,'editPost']);
+$app->router->get('/delete-product', [$ProductController,'delete'] );
