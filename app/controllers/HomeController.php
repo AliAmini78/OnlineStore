@@ -6,12 +6,18 @@ namespace App\Controllers;
 
 //usage package
 use Core\Controller;
+use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
+
 /**
  * home controller 
  */
 class HomeController extends Controller
 {
+    protected ProductRepository $product;
+    public function __construct() {
+        $this->product = new ProductRepository();
+    }
 
     //the index method
     public function index() 
@@ -22,4 +28,14 @@ class HomeController extends Controller
         $this->render('home', $params);
         
     }    
+
+    public function productList()
+    {
+        // get all product to show 
+        $AllProducts = $this->product->getAllItems();
+        $param = [
+            "products" => $AllProducts
+        ];
+        $this->render('product-list' , $param);
+    }
 }

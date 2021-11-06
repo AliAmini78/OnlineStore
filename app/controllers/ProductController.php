@@ -73,7 +73,7 @@ class ProductController extends Controller
 
         // set img upload path to our data for going to db 
         $data['pic'] = $ImgPath;
-
+        
         //insert data to db
         $result = $this->product->createItem($data);
 

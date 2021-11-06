@@ -39,15 +39,14 @@ class FileUpload
 
 
           // validate the img direction path 
-          if (!is_dir('../App/View/uploads')) {
-            mkdir('../App/View/uploads');
+          if (!is_dir('/uploads')) {
+            mkdir('/uploads');
         }
-       
 
         // declare the img path 
-        $ImgUrl = '../App/View/uploads/' . $Pic['name'];
+        $ImgUrl = './uploads/' .date("his"). $Pic['name'] ;
 
-
+        
         // add img to the path 
         $result = move_uploaded_file($Pic['tmp_name'], $ImgUrl);
 
