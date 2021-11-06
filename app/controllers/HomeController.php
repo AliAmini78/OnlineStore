@@ -38,4 +38,19 @@ class HomeController extends Controller
         ];
         $this->render('product-list' , $param);
     }
+
+    public function singlePage()
+    {
+        // get product id from header
+        $id = $_GET['id'];
+        
+        //get product for show single
+        $product = $this->product->getItem($id);
+        
+        $param = [
+            'product' => $product,
+        ];
+
+        $this->render('single-page' ,$param );
+    }
 }

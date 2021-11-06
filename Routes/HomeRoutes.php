@@ -16,6 +16,7 @@ $LoginController = new LoginController();
 // HOME routes
 $app->router->get('/', [$HomeController, 'index']);
 $app->router->get('/product-list' , [$HomeController, 'productList']);
+$app->router->get('/single-page' , [$HomeController, 'singlePage']);
 
 
 //register routes

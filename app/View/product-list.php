@@ -23,7 +23,7 @@
                         </div>
                         <div style="display: flex; justify-content:space-between;">
                             <a href="" class="btn btn-primary">like</a>
-                            <a href="" class="btn btn-danger"> more</a>
+                            <a href="/single-page?id=<?=$item['id']?>" class="btn btn-danger"> more</a>
                         </div>
                     </div>
                 </div>
