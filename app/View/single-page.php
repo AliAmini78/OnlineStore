@@ -1,46 +1,66 @@
 <?php require_once 'layout/Home/header.php' ?>
 
 <?php
-//dd($product);
+
 ?>
 
 <div class="content">
     <div class="post">
 
         <div class="w-100" style="height: 640px;">
-            <img class="w-100 h-100" src="./uploads/0952342020-05-30_120414.png" alt="#">
+            <img class="w-100 h-100" src="<?= $product['pic'] ?>" alt="#">
         </div>
-        <h1>title</h1>
+        <h1>title :<?= $product['title'] ?> </h1>
 
         <div>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim vel et non, officiis neque qui nesciunt, temporibus totam ab dicta voluptate dolore illum, facere provident consequatur. Eius maiores animi deserunt!
+                <?= $product['description'] ?>
             </p>
         </div>
         <span class="btn-group">
-            <button class="btn btn-danger">like</button>
-            <button class="btn btn-success">bookmark</button>
+            <a href="" class="btn btn-danger">like</a>
+            <a href="" class="btn btn-success">bookmark</a>
         </span>
     </div>
     <hr>
     <div class="comments border py-5 px-2">
+        <form action="/comment" method="POST">
+            <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            <div>
+                <label for="comment"> your comment : </label>
+            </div>
+            <textarea name="content" id="comment" class="w-100 p-3 " style="height: 100px;"></textarea>
+            <span>
+                <button class="btn btn-info text-white">send</button>
+            </span>
+        </form>
         <h3>comments</h3>
-        <div class="card p-2 mb-3">
-            <div>
-                <h4>ali :</h4>
+        <?php foreach ($comments as $item) { ?>
+            <div class="card p-2 mb-3">
+                <div>
+                    <h4><?= $item['full_name'] ?></h4>
+                </div>
+                <p>
+                    <?= $item['content'] ?>
+                </p>
             </div>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat reiciendis, officia ducimus doloremque illo, error officiis assumenda enim iure nisi vel ea molestias at minus fugiat harum repellendus accusantium eaque.
-            </p>
-        </div>
-        <div class="card p-2 mb-3">
-            <div>
-                <h4>mamad :</h4>
-            </div>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat reiciendis, officia ducimus doloremque illo, error officiis assumenda enim iure nisi vel ea molestias at minus fugiat harum repellendus accusantium eaque.
-            </p>
-        </div>
+        <?php } ?>
     </div>
 </div>
 <?php require_once 'layout/Home/footer.php' ?>
+
+<input type="hidden" value="<?= isset($message) ? $message : '' ?>" id="message">
+
+<script>
+    let link = document.querySelector('#contact');
+
+    var SweetAlertMessage = document.querySelector('#message').value;
+    if (SweetAlertMessage.trim() !== '') {
+        Swal.fire({
+            icon: 'success',
+            title: 'yeah',
+            text: SweetAlertMessage,
+            //footer: '<a href="">Why do I have this issue?</a>'
+        })
+    }
+</script>

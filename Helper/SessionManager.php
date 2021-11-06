@@ -42,6 +42,7 @@ class SessionManager
      * @return void
      */
     public static function loginUserSession($data){
+        $_SESSION['user_id'] = $data['id'];
         $_SESSION['user_name'] = $data['full_name'];
         $_SESSION['user_email'] = $data['email'];
         $_SESSION['is_login'] = true;
@@ -54,7 +55,8 @@ class SessionManager
      */
     public static function userLogout(){
         $_SESSION['is_login'] = false;
-        unset($_SESSION['user_email']);
+        unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
+        unset($_SESSION['user_email']);
     }
 }

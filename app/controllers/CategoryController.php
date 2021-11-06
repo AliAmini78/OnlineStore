@@ -48,6 +48,7 @@ class CategoryController extends Controller
         //get data
         $data = $_REQUEST ;
 
+        
         //validate input data 
         $isValid = ValidateData::validateUserInput($data);
         if (!$isValid) {

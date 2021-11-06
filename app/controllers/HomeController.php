@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 //usage package
 use Core\Controller;
+use Data\Repository\CommentRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
 
@@ -15,8 +16,10 @@ use Helper\ErrorMessage;
 class HomeController extends Controller
 {
     protected ProductRepository $product;
+    protected CommentRepository $comment;
     public function __construct() {
         $this->product = new ProductRepository();
+        $this->comment= new CommentRepository();
     }
 
     //the index method
@@ -33,6 +36,7 @@ class HomeController extends Controller
     {
         // get all product to show 
         $AllProducts = $this->product->getAllItems();
+
         $param = [
             "products" => $AllProducts
         ];
@@ -43,12 +47,20 @@ class HomeController extends Controller
     {
         // get product id from header
         $id = $_GET['id'];
-        
+
         //get product for show single
         $product = $this->product->getItem($id);
-        
+
+        //get comments of current product
+        $comments = $this->comment->getByUser($id);
+
+        // dd($comments);
+
+        // params for send to view
         $param = [
             'product' => $product,
+            'comments' => $comments,
+            'message' => ErrorMessage::requireErrorMessages('Message'),
         ];
 
         $this->render('single-page' ,$param );
