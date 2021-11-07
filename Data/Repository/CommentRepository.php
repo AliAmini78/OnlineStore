@@ -14,7 +14,7 @@ class CommentRepository extends BaseRepository implements CommentInterface
     public function getByProduct($productId)
     {
         try {
-            $statement = $this->pdo->prepare("SELECT * FROM {$this->table} where product_id= ? ");
+            $statement = $this->pdo->prepare("SELECT * FROM {$this->table} where product_id= ?  ");
 
             $statement->execute([$productId]);
 
@@ -29,7 +29,7 @@ class CommentRepository extends BaseRepository implements CommentInterface
     {
         // dd($productId);
         try {
-            $statement = $this->pdo->prepare("SELECT * FROM comment AS c , user AS u WHERE c.product_id = $productId  and c.user_id = u.id");
+            $statement = $this->pdo->prepare("SELECT * FROM  user AS u ,comment AS c WHERE c.product_id = $productId  and c.user_id = u.id");
             $statement->execute();
 
             return  $statement->fetchAll($this->pdo::FETCH_ASSOC);

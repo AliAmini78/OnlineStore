@@ -9,6 +9,7 @@ use Core\Controller;
 use Data\Repository\CommentRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
+use Helper\PrepareData;
 
 /**
  * home controller 
@@ -54,8 +55,10 @@ class HomeController extends Controller
         //get comments of current product
         $comments = $this->comment->getByUser($id);
 
-        // dd($comments);
-
+        //recursive function
+        
+        //PrepareData::recursiveFunction($comments);
+        
         // params for send to view
         $param = [
             'product' => $product,

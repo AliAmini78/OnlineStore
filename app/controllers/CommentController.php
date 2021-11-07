@@ -23,8 +23,14 @@ class CommentController  extends Controller
         // get data from input
         $data = $_REQUEST;
         
-        // add user id to the data
-        $data['user_id'] = $_SESSION['user_id'];
+        // condition for is user log in 
+        if (!isset($_SESSION['UserId'])) {
+            ErrorMessage::message('please log in for comment !!');
+            header("Location: /single-page?id={$data['product_id']}");   
+        }
+
+        // add user did to the data
+        $data['user_id'] = $_SESSION['UserId'];
 
          //validate input data 
          $isValid = ValidateData::validateUserInput($data);

@@ -29,7 +29,7 @@ class SessionManager
      * @return redirect
      */
     public static function validUserLogin(){
-        if (!isset($_SESSION['is_login'])||$_SESSION['is_login'] == false) {
+        if (!isset($_SESSION['IsLogin'])||$_SESSION['IsLogin'] == false) {
             ErrorMessage::message('please log in !!');
             header('Location: /login');
         }
@@ -42,10 +42,10 @@ class SessionManager
      * @return void
      */
     public static function loginUserSession($data){
-        $_SESSION['user_id'] = $data['id'];
-        $_SESSION['user_name'] = $data['full_name'];
-        $_SESSION['user_email'] = $data['email'];
-        $_SESSION['is_login'] = true;
+        $_SESSION['UserId'] = $data['id'];
+        $_SESSION['UserName'] = $data['full_name'];
+        $_SESSION['UserEmail'] = $data['email'];
+        $_SESSION['IsLogin'] = true;
     }
 
     /**
@@ -54,9 +54,9 @@ class SessionManager
      * @return redirect
      */
     public static function userLogout(){
-        $_SESSION['is_login'] = false;
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_name']);
-        unset($_SESSION['user_email']);
+        $_SESSION['IsLogin'] = false;
+        unset($_SESSION['UserId']);
+        unset($_SESSION['UserName']);
+        unset($_SESSION['UserEmail']);
     }
 }

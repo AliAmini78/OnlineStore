@@ -42,4 +42,19 @@ class PrepareData
         $PrepareData = substr_replace($PrepareData,"", -1);
         return $PrepareData;
     }
+
+    public static function recursiveFunction($data)
+    {
+        //dd($data);
+        $array=[];
+        foreach ($data as  $value) {
+            foreach ($data as $item) {
+                if ($item['parent_comment'] ==   $value['id']) {
+                    $array[] = [$value , $item];
+                }
+            }
+        }
+        dd($array);
+        
+    }
 }

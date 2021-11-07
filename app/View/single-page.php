@@ -30,6 +30,7 @@
                 <label for="comment"> your comment : </label>
             </div>
             <textarea name="content" id="comment" class="w-100 p-3 " style="height: 100px;"></textarea>
+            <input type="hidden" name="parent_comment" value="0" id="replay">
             <span>
                 <button class="btn btn-info text-white">send</button>
             </span>
@@ -43,7 +44,12 @@
                 <p>
                     <?= $item['content'] ?>
                 </p>
+                <div>
+                    <label for="#">replay : </label>
+                    <input type="radio" name="replay" value="<?= $item['id'] ?>" class="replay">
+                </div>
             </div>
+
         <?php } ?>
     </div>
 </div>
@@ -52,6 +58,13 @@
 <input type="hidden" value="<?= isset($message) ? $message : '' ?>" id="message">
 
 <script>
+    let replaysRadio = document.querySelectorAll('.replay');
+    let mainReplayBtn = document.querySelector('#replay');
+    replaysRadio.forEach(item => {
+        item.addEventListener('click', () => {
+            mainReplayBtn.value = item.value;
+        })
+    })
     let link = document.querySelector('#contact');
 
     var SweetAlertMessage = document.querySelector('#message').value;
