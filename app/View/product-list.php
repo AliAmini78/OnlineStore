@@ -17,7 +17,7 @@
                             <label for="Name"> <?= $item['title'] ?></label>
                             <strong class=" "> <?= $item['price'] ?></strong>
                         </div>
-                        <div class="card-text mb-4">
+                        <div class="card-text mb-4" style="max-height: 80px; overflow:hidden;">
                             <?= $item['description'] ?>
 
                         </div>
