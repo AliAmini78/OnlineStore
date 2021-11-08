@@ -15,14 +15,14 @@
             </p>
         </div>
         <span class="">
-            <a href="/like?id=<?= $product['id']?>" class="btn btn-danger">like</a>
+            <a href="/like?product_id=<?=$product['id']?>" class="btn btn-danger">like</a>
             <a href="" class="btn btn-success">bookmark</a>
         </span>
     </div>
     <hr>
     <div class="comments border py-5 px-2">
         <form action="/comment" method="POST">
-            <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
             <div>
                 <label for="comment"> your comment : </label>
             </div>

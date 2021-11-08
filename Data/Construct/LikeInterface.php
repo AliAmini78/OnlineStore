@@ -12,6 +12,8 @@ interface LikeInterface
     // function for is user like this product?
     public function isUserLike($userId,$productId);
     
+    //delete like by user id
+    public function deleteByUser($userId,$productId);
 
     // function for get all likes by user id  
     

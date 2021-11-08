@@ -23,12 +23,11 @@ class BaseRepository extends Database  implements BaseInterface
 
         // try to insert data in db
         try {
-
             $statement = $this->pdo->prepare("insert into {$this->table} ({$PrepareData['fields']}) values ({$PrepareData['params']})");
             $statement->execute($data);
-            return;
+            return true;
         } catch (\Throwable $th) {
-            header("Location: {$this->FailedRedirectRout}");
+            return false;
         }
     }
 

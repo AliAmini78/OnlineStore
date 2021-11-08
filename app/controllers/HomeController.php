@@ -7,6 +7,7 @@ namespace App\Controllers;
 //usage package
 use Core\Controller;
 use Data\Repository\CommentRepository;
+use Data\Repository\LikeRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
 use Helper\PrepareData;
@@ -18,9 +19,11 @@ class HomeController extends Controller
 {
     protected ProductRepository $product;
     protected CommentRepository $comment;
+    protected LikeRepository $like;
     public function __construct() {
         $this->product = new ProductRepository();
         $this->comment= new CommentRepository();
+        $this->like= new LikeRepository();
     }
 
     //the index method
@@ -38,6 +41,7 @@ class HomeController extends Controller
         // get all product to show 
         $AllProducts = $this->product->getAllItems();
 
+        // params foe send to view
         $param = [
             "products" => $AllProducts
         ];
@@ -55,6 +59,9 @@ class HomeController extends Controller
         //recursive function
         $comments =  $this->comment->groupCommentsByParentComment($id);
         
+        // get all likes for this product 
+        
+
         // dd($children);
         // params for send to view
         $param = [
