@@ -52,13 +52,10 @@ class HomeController extends Controller
         //get product for show single
         $product = $this->product->getItem($id);
 
-        //get comments of current product
-        $comments = $this->comment->getByUser($id);
-
         //recursive function
+        $comments =  $this->comment->groupCommentsByParentComment($id);
         
-        //PrepareData::recursiveFunction($comments);
-        
+        // dd($children);
         // params for send to view
         $param = [
             'product' => $product,

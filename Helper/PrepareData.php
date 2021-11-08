@@ -54,7 +54,6 @@ class PrepareData
                 }
             }
         }
-        dd($array);
         
     }
 }

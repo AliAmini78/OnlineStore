@@ -36,7 +36,11 @@
             </span>
         </form>
         <h3>comments</h3>
-        <?php foreach ($comments as $item) { ?>
+        <?php
+            if (!isset($comments[0])) {
+                 echo '<h4>the comments are empty</h4>';
+            }else{
+        foreach ($comments[0] as $item) { ?>
             <div class="card p-2 mb-3">
                 <div>
                     <h4><?= $item['full_name'] ?></h4>
@@ -49,8 +53,39 @@
                     <input type="radio" name="replay" value="<?= $item['id'] ?>" class="replay">
                 </div>
             </div>
+            <?php
+            if (isset($comments[$item['id']])) {
+                $level = $item['id'];
+                $stop = false;
+                while ($stop == false) {
+                    foreach ($comments[$level] as $key => $value) {
+                               
 
-        <?php } ?>
+            ?>
+                        <div class="card p-2 mb-3 bg-danger ">
+                            <div>
+                                <h4><?= $value['full_name'] ?></h4>
+                            </div>
+                            <p>
+                                <?= $value['content'] ?>
+                            </p>
+                            <div>
+                                <label for="#">replay : </label>
+                                <input type="radio" name="replay" value="<?= $value['id'] ?>" class="replay">
+                            </div>
+                        </div>
+
+        <?php
+                        if ($key === array_key_last($comments[$level])) {
+                            $level = $value['id'];
+                                if (!isset($comments[$level])) {
+                                    $stop = true;
+                                }
+                        }
+                    }
+                }
+            }
+        }  }?>
     </div>
 </div>
 <?php require_once 'layout/Home/footer.php' ?>
@@ -61,6 +96,7 @@
     let replaysRadio = document.querySelectorAll('.replay');
     let mainReplayBtn = document.querySelector('#replay');
     replaysRadio.forEach(item => {
+        console.log('as');
         item.addEventListener('click', () => {
             mainReplayBtn.value = item.value;
         })
@@ -68,6 +104,7 @@
     let link = document.querySelector('#contact');
 
     var SweetAlertMessage = document.querySelector('#message').value;
+
     if (SweetAlertMessage.trim() !== '') {
         Swal.fire({
             icon: 'success',

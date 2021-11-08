@@ -7,4 +7,5 @@ interface CommentInterface
 {
     public function getByProduct($productId);
     public function getByUser($productId);
+    public function groupCommentsByParentComment($productId);
 }
