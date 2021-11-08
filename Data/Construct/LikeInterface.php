@@ -15,9 +15,9 @@ interface LikeInterface
     //delete like by user id
     public function deleteByUser($userId,$productId);
 
-    // function for get all likes by user id  
+    // function for get all likes by PRODUCT id  
     
-    //public function getByUser($userId);
+    public function getByProduct($productId);
 
 
 }

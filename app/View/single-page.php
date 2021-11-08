@@ -14,10 +14,15 @@
                 <?= $product['description'] ?>
             </p>
         </div>
-        <span class="">
-            <a href="/like?product_id=<?=$product['id']?>" class="btn btn-danger">like</a>
-            <a href="" class="btn btn-success">bookmark</a>
-        </span>
+        <div style="display: flex; justify-content:space-between;">
+            <span>
+                <a href="/like?product_id=<?=$product['id']?>" class="btn btn-danger">like</a>
+                <small><?= $likeCount ?></small>
+            </span>
+            <span>
+                <a href="" class="btn btn-success">bookmark</a>
+            </span>
+        </div>
     </div>
     <hr>
     <div class="comments border py-5 px-2">

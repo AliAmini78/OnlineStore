@@ -60,4 +60,24 @@ class  LikeRepository extends BaseRepository implements LikeInterface
             return false;
         }
     }
+
+    /**
+     * count likes for current product
+     *
+     * @param [type] $productId
+     * @return void
+     */
+    public function getByProduct($productId){
+        try {
+            $statement = $this->pdo->prepare(
+                "SELECT COUNT(id)
+                FROM {$this->table}
+                WHERE  product_id = {$productId}"
+            );
+            $statement->execute();
+            return  $statement->fetch($this->pdo::FETCH_ASSOC | $this->pdo::FETCH_COLUMN);
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

@@ -60,13 +60,14 @@ class HomeController extends Controller
         $comments =  $this->comment->groupCommentsByParentComment($id);
         
         // get all likes for this product 
-        
+        $likesCount = $this->like->getByProduct($id);
 
         // dd($children);
         // params for send to view
         $param = [
             'product' => $product,
             'comments' => $comments,
+            'likeCount' => $likesCount,
             'message' => ErrorMessage::requireErrorMessages('Message'),
         ];
 
