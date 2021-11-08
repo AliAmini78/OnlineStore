@@ -14,8 +14,8 @@
                 <?= $product['description'] ?>
             </p>
         </div>
-        <span class="btn-group">
-            <a href="" class="btn btn-danger">like</a>
+        <span class="">
+            <a href="/like?id=<?= $product['id']?>" class="btn btn-danger">like</a>
             <a href="" class="btn btn-success">bookmark</a>
         </span>
     </div>

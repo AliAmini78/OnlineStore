@@ -7,6 +7,7 @@ use App\Controllers\UserController;
 use App\Controllers\CategoryController;
 use App\Controllers\CommentController;
 use App\Controllers\ProductController;
+use App\Controllers\LikeController;
 
 // the instance controller classes
 
@@ -16,6 +17,7 @@ $UserController = new UserController();
 $CategoryController = new CategoryController();
 $ProductController = new ProductController();
 $CommentController = new CommentController();
+$LikeController = new LikeController();
 
 // HOME routes
 $app->router->get('/Admin', [$AdminController, 'index']);
@@ -50,3 +52,8 @@ $app->router->get('/delete-product', [$ProductController,'delete'] );
 
 // COMMENT routes
 $app->router->post('/comment' , [$CommentController ,'add']);
+
+
+// LIKE routes
+$app->router->get('/like' , [$LikeController , 'add']); 
+
