@@ -8,6 +8,7 @@ namespace App\Controllers;
 use Core\Controller;
 use Data\Repository\CategoryRepository;
 use Data\Repository\CommentRepository;
+use Data\Repository\LikeRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
 use Helper\ValidateData;
@@ -19,12 +20,14 @@ class ProductController extends Controller
     protected ProductRepository $product;
     protected CategoryRepository $category;
     protected CommentRepository $comment;
+    protected LikeRepository $like;
 
     public function __construct()
     {
         $this->product = new ProductRepository();
         $this->category = new CategoryRepository();
         $this->comment = new CommentRepository();
+        $this->like = new LikeRepository();
     }
 
 
@@ -182,12 +185,15 @@ class ProductController extends Controller
 
         //delete comments of products
         $CommentResult = $this->comment->deleteCommentsByProduct($id);
+
+        // delete likes of product
+        $likeResult = $this->like->deleteByProduct($id);
         
         //delete item
         $result = $this->product->deleteItem($id);
 
 
-        if (!$result || !$CommentResult) {
+        if (!$result || !$CommentResult || !$likeResult) {
             header("Location:/product");
             ErrorMessage::message('some thing wrong !!');
             return;

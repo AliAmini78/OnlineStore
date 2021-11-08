@@ -19,5 +19,8 @@ interface LikeInterface
     
     public function getByProduct($productId);
 
+    // function for delete likes by product
+    public function deleteByProduct($productId);
+
 
 }
