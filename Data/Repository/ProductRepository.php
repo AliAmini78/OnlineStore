@@ -6,8 +6,10 @@ namespace Data\Repository;
 
 //usage package
 use Data\Repository\BaseRepository;
-
-class ProductRepository  extends BaseRepository
+use Data\Construct\ProductInterface;
+class ProductRepository  extends BaseRepository 
 {
+    //table name  
     protected $table = 'product' ;
+
 }

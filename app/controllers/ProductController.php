@@ -7,6 +7,7 @@ namespace App\Controllers;
 //usage package
 use Core\Controller;
 use Data\Repository\CategoryRepository;
+use Data\Repository\CommentRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
 use Helper\ValidateData;
@@ -17,11 +18,13 @@ class ProductController extends Controller
 
     protected ProductRepository $product;
     protected CategoryRepository $category;
+    protected CommentRepository $comment;
 
     public function __construct()
     {
         $this->product = new ProductRepository();
         $this->category = new CategoryRepository();
+        $this->comment = new CommentRepository();
     }
 
 
@@ -177,11 +180,14 @@ class ProductController extends Controller
         //delete locally pic
         FileUpload::DeleteFile($ImgPath);
 
+        //delete comments of products
+        $CommentResult = $this->comment->deleteCommentsByProduct($id);
+        
         //delete item
         $result = $this->product->deleteItem($id);
 
 
-        if (!$result) {
+        if (!$result || !$CommentResult) {
             header("Location:/product");
             ErrorMessage::message('some thing wrong !!');
             return;
