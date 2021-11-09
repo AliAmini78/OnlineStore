@@ -3,6 +3,7 @@
 
 //usage package
 use App\Controllers\AdminController;
+use App\Controllers\BookmarkController;
 use App\Controllers\CartController;
 use App\Controllers\UserController;
 use App\Controllers\CategoryController;
@@ -11,9 +12,8 @@ use App\Controllers\ProductController;
 use App\Controllers\LikeController;
 use App\Controllers\ScoreController;
 
+
 // the instance controller classes
-
-
 $AdminController = new AdminController();
 $UserController = new UserController();
 $CategoryController = new CategoryController();
@@ -22,7 +22,7 @@ $CommentController = new CommentController();
 $LikeController = new LikeController();
 $CartController = new CartController();
 $ScoreController = new ScoreController();
-
+$BookmarkController = new BookmarkController();
 // HOME routes
 $app->router->get('/Admin', [$AdminController, 'index']);
 
@@ -72,3 +72,5 @@ $app->router->get('/remove-to-cart' ,[$CartController , 'removeToProductCart'] )
 //SCORE routes 
 $app->router->post('/add-score',[$ScoreController , 'add']);
 
+//BOOKMARK routes
+$app->router->post('/add-bookmark',[$BookmarkController , 'add']);

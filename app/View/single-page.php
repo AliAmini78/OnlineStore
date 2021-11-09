@@ -21,13 +21,21 @@
             </span>
             <span>
                 <label for="score">score</label>
-                <small><?=$score?>/5 </small>
+                <small><?= $score ?>/5 </small>
                 <form action="/add-score" method="POST">
                     <input type="range" name="value" id="score" min="0" max="5">
-                    <input type="hidden" name="product_id" value="<?=$product['id']?>">
+                    <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                     <button type="submit">send</button>
                 </form>
 
+            </span>
+            <span>
+                <form action="/add-bookmark" method="POST">
+                    <label for="bookmark"> bookmark</label>
+                    <input type="checkbox" name="bookmark" id="bookmark">
+                    <input type="hidden" name="product_id">
+                    <button type="submit" id="bookmark_btn" style="display:none;"></button>
+                </form>
             </span>
             <span>
                 <a href="/add-to-cart?product_id=<?= $product['id'] ?>" class="btn btn-success">add to cart</a>
@@ -56,8 +64,14 @@
 <input type="hidden" value="<?= isset($message) ? $message : '' ?>" id="message">
 
 <script>
+    let BookmarkInput = document.querySelector('#bookmark');
+    let BookmarkBtn = document.querySelector('#bookmark_btn');
     let replaysRadio = document.querySelectorAll('.replay');
     let mainReplayBtn = document.querySelector('#replay');
+
+    BookmarkInput.addEventListener('click' , ()=>BookmarkBtn.click())
+
+
     replaysRadio.forEach(item => {
         console.log('as');
         item.addEventListener('click', () => {
