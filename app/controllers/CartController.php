@@ -21,7 +21,13 @@ class CartController extends Controller
 
     public function index(){
 
-        $this->render('cart');
+        $cartData = $_SESSION['cart'];
+        //params for send to view 
+        $param=[
+            'cartData' => $cartData,
+        ];
+        
+        $this->render('cart' , $param);
     }
 
     // add product to session 
@@ -39,6 +45,24 @@ class CartController extends Controller
 
         // success redirect
         ErrorMessage::message('your product added !!');
+        header('Location: /cart');
+        
+    }
+
+    public function removeToProductCart()
+    {
+        //set product id
+        $productId = $_GET['product_id'];
+
+        // get product by product id 
+        $product = $this->product->getItem($productId);
+        
+        // add product to session
+        PrepareData::removeDataForCartSession($product);
+
+
+        // success redirect
+        ErrorMessage::message('your product remove !!');
         header('Location: /cart');
         
     }

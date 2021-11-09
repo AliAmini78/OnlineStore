@@ -66,7 +66,12 @@ class PrepareData
     }
 
 
-
+    /**
+     * add product to cart
+     *
+     * @param [type] $product
+     * @return void
+     */
     public static function addDataForCartSession($product)
     {
 
@@ -85,11 +90,28 @@ class PrepareData
         } else {
             $_SESSION['cart'][$productId] =[
                 'product_id' => $productId,
+                'name' => $product['title'],
                 'price' => $product['price'],
                 'count' => 1 ,
                 'sum' => $product['price'],
             ];
         }
         
+    }
+
+
+    /**
+     * remove product from car
+     *
+     * @param [type] $product
+     * @return void
+     */
+    public static function removeDataForCartSession($product){
+        $productId = $product['id'];
+        $_SESSION['cart'][$productId]['count'] -= 1;
+        $_SESSION['cart'][$productId]['sum'] = $_SESSION['cart'][$productId]['count'] * $product['price'];
+
+        if($_SESSION['cart'][$productId]['count'] <=0)
+            unset($_SESSION['cart'][$productId]);
     }
 }

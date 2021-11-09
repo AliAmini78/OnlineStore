@@ -64,4 +64,5 @@ $app->router->get('/like' , [$LikeController , 'add']);
 //CART routes
 $app->router->get('/cart' ,[$CartController , 'index'] );
 $app->router->get('/add-to-cart' ,[$CartController , 'addToProductCart'] );
+$app->router->get('/remove-to-cart' ,[$CartController , 'removeToProductCart'] );
 
