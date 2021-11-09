@@ -5,7 +5,7 @@
     <div class="row border-bottom pb-3" style="display: flex; justify-content:space-between;">
 
         <div>
-            <h2 class="text-info "> User List</h2>
+            <h2 class="text-info "> Cart </h2>
         </div>
     </div>
     <br />
@@ -60,7 +60,6 @@
 
             </tbody>
         </table>
-
     </div>
 </div>
 
