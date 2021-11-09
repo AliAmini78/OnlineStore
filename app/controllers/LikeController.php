@@ -34,12 +34,6 @@ class LikeController extends Controller
         // add user id to the data
         $data['user_id'] = $_SESSION['UserId'];
 
-        //validate input data 
-        $isValid = ValidateData::validateUserInput($data);
-        if (!$isValid) {
-            header("Location: /single-page?id={$data['product_id']}");
-            return;
-        }
 
         //validate the value
         $userId = $data['user_id'];

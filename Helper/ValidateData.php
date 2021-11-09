@@ -5,6 +5,7 @@ namespace Helper;
 
 
 //usage package
+use Data\Repository\ScoreRepository;
 use Helper\SessionManager;
 
 /**
@@ -12,6 +13,10 @@ use Helper\SessionManager;
  */
 class ValidateData
 {
+    protected ScoreRepository $score;
+    public function __construct() {
+        $this->score = new ScoreRepository();
+    }
 
     /**
      * validation input data from use function
@@ -32,10 +37,36 @@ class ValidateData
         return $IsValid;
     }
 
+    /**
+     * valid is password and confirm password correct in register page?
+     *
+     * @param [type] $password
+     * @param [type] $confirmPassword
+     * @return void
+     */
     public static function checkPasswordConfirm($password , $confirmPassword)
     {
         return $password === $confirmPassword;
     }
+
+
+    /**
+     * get avg od score of a product 
+     *
+     * @return void
+     */
+    public function avgScore($productId){
+        $scores = $this->score->getByProduct($productId);
+        $avg = 0;
+        foreach ($scores as $item) {
+            $avg += $item['value'];
+        }
+        if (count($scores) == 0)
+            return $avg ;
+
+        return $avg/ count($scores);
+    }
+
 
     
 }

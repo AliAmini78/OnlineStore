@@ -16,11 +16,21 @@
         </div>
         <div style="display: flex; justify-content:space-between;">
             <span>
-                <a href="/like?product_id=<?=$product['id']?>" class="btn btn-danger">like</a>
+                <a href="/like?product_id=<?= $product['id'] ?>" class="btn btn-danger">like</a>
                 <small><?= $likeCount ?></small>
             </span>
             <span>
-                <a href="/add-to-cart?product_id=<?=$product['id']?>" class="btn btn-success">add to cart</a>
+                <label for="score">score</label>
+                <small><?=$score?>/5 </small>
+                <form action="/add-score" method="POST">
+                    <input type="range" name="value" id="score" min="0" max="5">
+                    <input type="hidden" name="product_id" value="<?=$product['id']?>">
+                    <button type="submit">send</button>
+                </form>
+
+            </span>
+            <span>
+                <a href="/add-to-cart?product_id=<?= $product['id'] ?>" class="btn btn-success">add to cart</a>
             </span>
         </div>
     </div>
@@ -38,7 +48,7 @@
             </span>
         </form>
         <h3>comments</h3>
-            <?php require_once 'partials/comments.php' ?>
+        <?php require_once 'partials/comments.php' ?>
     </div>
 </div>
 <?php require_once 'layout/Home/footer.php' ?>
@@ -61,9 +71,7 @@
     if (SweetAlertMessage.trim() !== '') {
         Swal.fire({
             icon: 'success',
-            title: 'yeah',
             text: SweetAlertMessage,
-            //footer: '<a href="">Why do I have this issue?</a>'
         })
     }
 </script>

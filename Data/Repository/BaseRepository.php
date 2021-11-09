@@ -21,6 +21,7 @@ class BaseRepository extends Database  implements BaseInterface
         // prepare input data for insert to db 
         $PrepareData = PrepareData::insertToDb($data);
         // try to insert data in db
+
         try {
             $statement = $this->pdo->prepare("insert into {$this->table} ({$PrepareData['fields']}) values ({$PrepareData['params']})");
             $statement->execute($data);

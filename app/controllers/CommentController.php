@@ -45,9 +45,10 @@ class CommentController  extends Controller
         
          // the redirect condition for exact route
          if (!$result) {
-             ErrorMessage::message('comment successfully added !!');
+             ErrorMessage::message('comment not added added !!');
              header("Location: /single-page?id={$data['product_id']}");    
-         }
+            }
+            ErrorMessage::message('comment successfully added !!');
          header("Location: /single-page?id={$data['product_id']}");
     }
 }

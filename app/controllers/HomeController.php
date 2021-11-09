@@ -11,7 +11,7 @@ use Data\Repository\LikeRepository;
 use Data\Repository\ProductRepository;
 use Helper\ErrorMessage;
 use Helper\PrepareData;
-
+use Helper\ValidateData;
 /**
  * home controller 
  */
@@ -20,10 +20,12 @@ class HomeController extends Controller
     protected ProductRepository $product;
     protected CommentRepository $comment;
     protected LikeRepository $like;
+    protected ValidateData $ScoreAvg;
     public function __construct() {
         $this->product = new ProductRepository();
         $this->comment= new CommentRepository();
         $this->like= new LikeRepository();
+        $this->ScoreAvg = new ValidateData();
     }
 
     //the index method
@@ -62,12 +64,16 @@ class HomeController extends Controller
         // get all likes for this product 
         $likesCount = $this->like->getByProduct($id);
 
+
+        //avg score
+        $score =$this->ScoreAvg->avgScore($id); 
         // dd($children);
         // params for send to view
         $param = [
             'product' => $product,
             'comments' => $comments,
             'likeCount' => $likesCount,
+            'score' => $score,
             'message' => ErrorMessage::requireErrorMessages('Message'),
         ];
 

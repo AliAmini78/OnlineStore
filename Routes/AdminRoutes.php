@@ -9,6 +9,7 @@ use App\Controllers\CategoryController;
 use App\Controllers\CommentController;
 use App\Controllers\ProductController;
 use App\Controllers\LikeController;
+use App\Controllers\ScoreController;
 
 // the instance controller classes
 
@@ -20,6 +21,7 @@ $ProductController = new ProductController();
 $CommentController = new CommentController();
 $LikeController = new LikeController();
 $CartController = new CartController();
+$ScoreController = new ScoreController();
 
 // HOME routes
 $app->router->get('/Admin', [$AdminController, 'index']);
@@ -65,4 +67,8 @@ $app->router->get('/like' , [$LikeController , 'add']);
 $app->router->get('/cart' ,[$CartController , 'index'] );
 $app->router->get('/add-to-cart' ,[$CartController , 'addToProductCart'] );
 $app->router->get('/remove-to-cart' ,[$CartController , 'removeToProductCart'] );
+
+
+//SCORE routes 
+$app->router->post('/add-score',[$ScoreController , 'add']);
 
