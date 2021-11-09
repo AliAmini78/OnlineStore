@@ -59,4 +59,8 @@ class SessionManager
         unset($_SESSION['UserName']);
         unset($_SESSION['UserEmail']);
     }
+
+    public static function CartSession(){
+       return isset($_SESSION['cart'])? $_SESSION['cart'] : $_SESSION['cart'] = [] ;
+    }
 }

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap 5 CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
+
 <body>
-<header class="p-3 bg-dark text-white">
+    <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
@@ -20,9 +22,13 @@
 
                 </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                </form>
+
+                <span class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <a href="/cart" class="btn btn-primary">
+                        CART
+                        <small class="border bg-danger px-2 py-1 rounded-circle"><?= count($_SESSION['cart'])?></small>
+                    </a>
+                </span>
 
                 <div class="text-end">
                     <a href="/login" class="btn btn-outline-light me-2">Login</a>
@@ -32,8 +38,4 @@
         </div>
     </header>
     <main class="my-5">
-    <div class="container">
-
-    
-
-   
+        <div class="container">

@@ -3,6 +3,10 @@
 // name space
 namespace Helper;
 
+
+//usage package
+use Helper\SessionManager;
+
 /**
  * class for prepare the data for database 
  */
@@ -39,20 +43,52 @@ class PrepareData
             $PrepareData .= " {$key}=:{$key},";
         }
         //remove last char(,)
-        $PrepareData = substr_replace($PrepareData,"", -1);
+        $PrepareData = substr_replace($PrepareData, "", -1);
         return $PrepareData;
     }
 
+    /**
+     * recursive function for comment
+     *
+     * @param [array] $data = array of child comments
+     * @return void 
+     */
     public static function recursiveFunction($data)
     {
-        //dd($data);
-        $array=[];
+        $array = [];
         foreach ($data as  $value) {
             foreach ($data as $item) {
                 if ($item['parent_comment'] ==   $value['id']) {
-                    $array[] = [$value , $item];
+                    $array[] = [$value, $item];
                 }
             }
+        }
+    }
+
+
+
+    public static function addDataForCartSession($product)
+    {
+
+        //the progress result
+        $result = false;
+        //product id
+        $productId = $product['id'];
+        // set the cart session
+        $cart = SessionManager::CartSession();
+        
+
+        //condition for isset product in cart ?
+        if (isset($cart[$productId])) {
+            $_SESSION['cart'][$productId]['count'] += 1;
+            $_SESSION['cart'][$productId]['sum'] = $_SESSION['cart'][$productId]['count'] * $product['price'];
+        } else {
+            $_SESSION['cart'][$productId] =[
+                'product_id' => $productId,
+                'price' => $product['price'],
+                'count' => 1 ,
+                'sum' => $product['price'],
+            ];
         }
         
     }

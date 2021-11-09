@@ -20,7 +20,7 @@
                 <small><?= $likeCount ?></small>
             </span>
             <span>
-                <a href="/cart" class="btn btn-success">add to cart</a>
+                <a href="/add-to-cart?product_id=<?=$product['id']?>" class="btn btn-success">add to cart</a>
             </span>
         </div>
     </div>

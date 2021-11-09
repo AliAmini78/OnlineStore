@@ -3,6 +3,7 @@
 
 //usage package
 use App\Controllers\AdminController;
+use App\Controllers\CartController;
 use App\Controllers\UserController;
 use App\Controllers\CategoryController;
 use App\Controllers\CommentController;
@@ -18,6 +19,7 @@ $CategoryController = new CategoryController();
 $ProductController = new ProductController();
 $CommentController = new CommentController();
 $LikeController = new LikeController();
+$CartController = new CartController();
 
 // HOME routes
 $app->router->get('/Admin', [$AdminController, 'index']);
@@ -56,4 +58,10 @@ $app->router->post('/comment' , [$CommentController ,'add']);
 
 // LIKE routes
 $app->router->get('/like' , [$LikeController , 'add']); 
+
+
+
+//CART routes
+$app->router->get('/cart' ,[$CartController , 'index'] );
+$app->router->get('/add-to-cart' ,[$CartController , 'addToProductCart'] );
 
