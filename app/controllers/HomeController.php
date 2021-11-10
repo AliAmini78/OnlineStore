@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 //usage package
 use Core\Controller;
+use Data\Repository\BookmarkRepository;
 use Data\Repository\CommentRepository;
 use Data\Repository\LikeRepository;
 use Data\Repository\ProductRepository;
@@ -21,11 +22,13 @@ class HomeController extends Controller
     protected CommentRepository $comment;
     protected LikeRepository $like;
     protected ValidateData $ScoreAvg;
+    protected BookmarkRepository $bookmark;
     public function __construct() {
         $this->product = new ProductRepository();
         $this->comment= new CommentRepository();
         $this->like= new LikeRepository();
         $this->ScoreAvg = new ValidateData();
+        $this->bookmark = new BookmarkRepository();
     }
 
     //the index method
@@ -55,6 +58,9 @@ class HomeController extends Controller
         // get product id from header
         $id = $_GET['id'];
 
+        // get user id
+        $userId = isset($_SESSION['UserId']) ? $_SESSION['UserId'] : null;
+
         //get product for show single
         $product = $this->product->getItem($id);
 
@@ -67,12 +73,17 @@ class HomeController extends Controller
 
         //avg score
         $score =$this->ScoreAvg->avgScore($id); 
-        // dd($children);
+
+        // is user book mark this product
+        if($userId != null)
+            $isBookmark = $this->bookmark->getByUserAndProduct($userId,$id);
+
         // params for send to view
         $param = [
             'product' => $product,
             'comments' => $comments,
             'likeCount' => $likesCount,
+            'isBookmark' => $isBookmark,
             'score' => $score,
             'message' => ErrorMessage::requireErrorMessages('Message'),
         ];

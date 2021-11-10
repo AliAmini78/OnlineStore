@@ -10,4 +10,7 @@ interface ScoreInterface{
 
     // get score by product
     public function getByProduct($productId);
+
+    // delete score be product
+    public function deleteByProduct($productId);
 }

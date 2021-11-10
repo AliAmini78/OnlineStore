@@ -32,8 +32,8 @@
             <span>
                 <form action="/add-bookmark" method="POST">
                     <label for="bookmark"> bookmark</label>
-                    <input type="checkbox" name="bookmark" id="bookmark">
-                    <input type="hidden" name="product_id">
+                    <input type="checkbox" id="bookmark">
+                    <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                     <button type="submit" id="bookmark_btn" style="display:none;"></button>
                 </form>
             </span>

@@ -66,4 +66,23 @@ class ScoreRepository extends BaseRepository implements ScoreInterface
             header("Location: {$this->FailedRedirectRout}");
         }
     }
+
+
+    /**
+     * delete score by product id
+     *
+     * @param [type] $productId
+     * @return void
+     */
+    public function deleteByProduct($productId){
+        try {
+            $statement = $this->pdo->prepare("DELETE FROM {$this->table}  WHERE product_id = :product_id");
+            $statement->bindParam(':product_id', $productId);
+            $statement->execute();
+            return true;
+            
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

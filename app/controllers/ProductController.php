@@ -6,10 +6,12 @@ namespace App\Controllers;
 
 //usage package
 use Core\Controller;
+use Data\Repository\BookmarkRepository;
 use Data\Repository\CategoryRepository;
 use Data\Repository\CommentRepository;
 use Data\Repository\LikeRepository;
 use Data\Repository\ProductRepository;
+use Data\Repository\ScoreRepository;
 use Helper\ErrorMessage;
 use Helper\ValidateData;
 use Helper\FileUpload;
@@ -21,6 +23,8 @@ class ProductController extends Controller
     protected CategoryRepository $category;
     protected CommentRepository $comment;
     protected LikeRepository $like;
+    protected BookmarkRepository $bookmark;
+    protected ScoreRepository $score;
 
     public function __construct()
     {
@@ -28,6 +32,8 @@ class ProductController extends Controller
         $this->category = new CategoryRepository();
         $this->comment = new CommentRepository();
         $this->like = new LikeRepository();
+        $this->bookmark = new BookmarkRepository();
+        $this->score = new ScoreRepository();
     }
 
 
@@ -189,11 +195,17 @@ class ProductController extends Controller
         // delete likes of product
         $likeResult = $this->like->deleteByProduct($id);
         
+        // delete bookmarks of product
+        $bookmarkResult = $this->bookmark->deleteByProduct($id);
+
+        // delete Score of product
+        $scoreResult = $this->score->deleteByProduct($id);
+        
         //delete item
         $result = $this->product->deleteItem($id);
 
 
-        if (!$result || !$CommentResult || !$likeResult) {
+        if (!$result || !$CommentResult || !$likeResult || !$bookmarkResult || !$scoreResult) {
             header("Location:/product");
             ErrorMessage::message('some thing wrong !!');
             return;

@@ -71,7 +71,8 @@ class FileUpload
      */
     public static function DeleteFile($FilePath)
     {
-        $result = unlink($FilePath);
+        if (file_exists($FilePath))
+            $result = unlink($FilePath);
 
         if (!$result) {
             $_SESSION['Message'] = "there is no file for delete";
